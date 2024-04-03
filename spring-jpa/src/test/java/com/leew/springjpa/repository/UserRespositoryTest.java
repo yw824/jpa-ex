@@ -107,4 +107,14 @@ class UserRespositoryTest {
         Example<User> example = Example.of(user, matcher);
         userRepository.findAll(example).forEach(System.out::println);
     }
+
+    @Test
+    void update() {
+        userRepository.save(new User("update", "updateUser@fastcampus.com"));
+
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setEmail("martin-updated@fastcampus.com");
+
+        userRepository.save(user);
+    }
 }
