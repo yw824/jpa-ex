@@ -117,4 +117,14 @@ class UserRespositoryTest {
 
         userRepository.save(user);
     }
+
+    @Test
+    void selectQueryMethod() {
+        // martin이라는 이름이 현재 DB에는 여러 개일 것이기 떄문에 에러 발생할 것
+        // System.out.println(userRepository.findByName("martin"));
+
+        // 이러면, 여러 개의 값을 가져오기 위해 List<User>를 위한 함수를 가져와야 한다.
+        // UserRepository 코드 : List<User> findAllByName(String name);
+        userRepository.findAllByName("martin").forEach(System.out::println);
+    }
 }
