@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
+
 @SpringBootTest
 public class QueryMethodTest {
 
@@ -39,4 +41,37 @@ public class QueryMethodTest {
         userRepository.findLast1ByName("martin").forEach(System.out::println);
         // last는 작동하지 않는다. QueryMethod에서는 작동하지 않는 키워드
     }
+
+    @Test
+    void AndOrTest() {
+        // userRepository.findByEmailAndName("martin@fastcampus.com", "martin")
+        //        .forEach(System.out::println);
+
+        userRepository.findByEmailOrName("martin@fastcampus.com", "update")
+                .forEach(System.out::println);
+    }
+
+    @Test
+    void beforeAfterTest() {
+        // userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)); // 어제의 값 넣기
+        // userRepository.findByCreatedAtAfter(
+        //        LocalDateTime.of(2024, 03, 31, 0, 0, 0))
+        //        .forEach(System.out::println);
+
+        //userRepository.findByIdAfter(3L).forEach(System.out::println);
+        userRepository.findByCreatedAtGreaterThan(
+                LocalDateTime.of(2024, 03, 31, 0, 0, 0)
+        ).forEach(System.out::println);
+
+        userRepository.findByCreatedAtGreaterThanEqual(
+                LocalDateTime.of(2024, 03, 31, 0, 0, 0)
+        ).forEach(System.out::println);
+    }
+
+    @Test
+    void between() {
+        userRepository.findByIdBetween(5L, 1L).forEach(System.out::println);
+    }
+
+
 }
