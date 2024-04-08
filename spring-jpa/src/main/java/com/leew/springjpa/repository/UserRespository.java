@@ -1,8 +1,6 @@
 package com.leew.springjpa.repository;
 
 import com.leew.springjpa.dto.User;
-import org.springframework.cglib.core.Local;
-import org.springframework.data.convert.Jsr310Converters;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
