@@ -53,4 +53,16 @@ public interface UserRespository extends JpaRepository<User, Long> {
     List<User> findByCreatedAtBetween(LocalDate yesterday, LocalDate tomorrow);
 
     List<User> findByIdBetween(Long id1, Long id2);
+
+    List<User> findByIdIsNotNull();
+
+    // List<User> findByAddressIsNotEmpty();
+
+    List<User> findByNameIn(List<String> names);
+
+    List<User> findByNameStartingWith(String name);
+    List<User> findByNameEndingWith(String name);
+    List<User> findByNameContaining(String name);
+
+    List<User> findByNameLike(String name);
 }

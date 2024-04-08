@@ -17,10 +17,10 @@ class UserTest {
 
         System.out.println(">>> " + user);
 
-        User user1 = new User(null, "user1", "user1@fastcampus.com", LocalDateTime.now(), LocalDateTime.now());
+        // User user1 = new User(null, "user1", "user1@fastcampus.com", LocalDateTime.now(), LocalDateTime.now());
         User user2 = new User("user2", "user2@fastcampus.com");
 
-        System.out.println(">>> " + user1);
+        // System.out.println(">>> " + user1);
         System.out.println(">>> " + user2);
 
     }

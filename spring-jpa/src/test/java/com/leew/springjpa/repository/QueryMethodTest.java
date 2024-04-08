@@ -73,5 +73,4 @@ public class QueryMethodTest {
         userRepository.findByIdBetween(5L, 1L).forEach(System.out::println);
     }
 
-
 }

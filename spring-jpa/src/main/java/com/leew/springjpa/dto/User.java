@@ -1,11 +1,10 @@
 package com.leew.springjpa.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,4 +21,8 @@ public class User {
     private String email;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    /**
+     * @OneToMany(fetch=FetchType.EAGER)
+     * private List<Address> address;
+     */
 }
