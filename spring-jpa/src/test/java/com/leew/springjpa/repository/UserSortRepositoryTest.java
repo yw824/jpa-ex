@@ -3,6 +3,7 @@ package com.leew.springjpa.repository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,5 +41,19 @@ class UserSortRepositoryTest {
                      Sort.by(Sort.Order.desc("id"), Sort.Order.asc("email"))
                         )
                 .forEach(System.out::println);
+    }
+
+    @Test
+    void pageableTest() {
+        /**
+         *      Page<User> findByName(String name, Pageable pageable);
+         */
+        userRepository.findByName("martin",
+                        PageRequest.of(0, 2, Sort.by(Sort.Order.desc("id"))))
+                .forEach(System.out::println);
+        System.out.println(userRepository.findByName("martin",
+                        PageRequest.of(0, 2, Sort.by(Sort.Order.desc("id"))))
+                        .getTotalElements()
+                );
     }
 }
