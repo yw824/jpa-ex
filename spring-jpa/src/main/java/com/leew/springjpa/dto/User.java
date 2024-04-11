@@ -18,16 +18,24 @@ import java.util.List;
 )
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
     private String name;
     @NonNull
     private String email;
+    @Column(updatable = false)
     private LocalDateTime createdAt;
+    @Column(insertable = false)
     private LocalDateTime updatedAt;
     /**
      * @OneToMany(fetch=FetchType.EAGER)
      * private List<Address> address;
      */
+
+    @Transient
+    private String testData;
+
+    @Enumerated(value=EnumType.STRING)
+    private Gender gender;
 }

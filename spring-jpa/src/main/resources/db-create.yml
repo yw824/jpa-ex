@@ -22,4 +22,3 @@ spring:
     init:
       mode: always
       platform: mysql
-
