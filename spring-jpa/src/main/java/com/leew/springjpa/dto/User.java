@@ -1,5 +1,7 @@
 package com.leew.springjpa.dto;
 
+import com.leew.springjpa.listener.MyEntityListener;
+import com.leew.springjpa.listener.UserEntityListener;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +18,7 @@ import java.util.List;
         indexes={@Index(columnList = "name")},
         uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})}
 )
+@EntityListeners(value={MyEntityListener.class, UserEntityListener.class})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

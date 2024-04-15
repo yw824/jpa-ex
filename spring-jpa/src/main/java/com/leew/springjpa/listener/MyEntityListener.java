@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 public class MyEntityListener {
 
+
     /** 이 객체는 Entity의 시선 밖이기 때문에,
      Entity를 받기 위해 Object로 받아서 처리해야 한다.
      Object로 받는 이유 : Entity가 Book일 수도 있고, User일 수도 있다.
