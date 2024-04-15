@@ -35,10 +35,51 @@ public class EntityTest {
     @Test
     void enumTest() {
         User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
-        user.setGender(Gender.MALE);
+        // user.setGender(Gender.MALE);
 
         userRepository.save(user);
 
         userRepository.findAll().forEach(System.out::println);
+    }
+
+    @Test
+    void listenerTest() {
+        User user = new User();
+        user.setEmail("entityListener@fastcampus.com");
+        user.setName("entityListener");
+
+        userRepository.save(user);
+
+        User user2 = userRepository.findById(2L).orElseThrow(RuntimeException::new);
+        user2.setName("marrtin2");
+        userRepository.save(user2);
+
+        userRepository.deleteById(6L); // updatable+insertable 삭제 - mysql workbench 가서 매번 확인하자.
+    }
+
+    @Test
+    void prePersistTest() {
+        User user = new User();
+        user.setEmail("martinprePersist@fastcampus.com");
+        user.setName("martin");
+        // user.setCreatedAt(LocalDateTime.now());
+        // user.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(user);
+
+        System.out.println(userRepository.findByEmail("martinprePersist@fastcampus.com"));
+    }
+
+    @Test
+    void preUpdateTest() {
+        User user = userRepository.findByEmail("martinprePersist@fastcampus.com");
+
+        System.out.println("as-is >>> " + user);
+        user.setEmail("martin_prePersist_preUpdate@fastcampus.com");
+
+        userRepository.save(user);
+        System.out.println("to-be >>>" +
+            userRepository.findAll().get(6) // 0번째 인덱스부터 6번째 index의 데이터 가져와서 출력
+        );
     }
 }

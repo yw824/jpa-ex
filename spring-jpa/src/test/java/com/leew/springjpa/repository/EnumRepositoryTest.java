@@ -17,7 +17,7 @@ class EnumRepositoryTest {
     @Test
     void enumTest() {
         User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
-        user.setGender(Gender.MALE);
+        // user.setGender(Gender.MALE);
 
         userRepository.save(user);
 
