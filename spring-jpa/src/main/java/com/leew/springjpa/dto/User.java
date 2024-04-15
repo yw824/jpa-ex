@@ -4,11 +4,14 @@ import com.leew.springjpa.listener.MyEntityListener;
 import com.leew.springjpa.listener.UserEntityListener;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,8 +21,14 @@ import java.util.List;
         indexes={@Index(columnList = "name")},
         uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})}
 )
-@EntityListeners(value={MyEntityListener.class, UserEntityListener.class})
-public class User {
+@EntityListeners(value={UserEntityListener.class})
+@Data
+@ToString(callSuper=true)
+@EqualsAndHashCode(callSuper=true)
+public class User extends BaseEntity {
+    /**
+     * BaseEntity에서 AuditingEntityListener 처리하기 때문에 여기서는 해당 listener 제외
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,10 +36,13 @@ public class User {
     private String name;
     @NonNull
     private String email;
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
-    @Column(insertable = false)
-    private LocalDateTime updatedAt;
+
+//    @Column(updatable = false)
+//    @CreatedDate
+//    private LocalDateTime createdAt;
+//    @Column(insertable = false)
+//    @LastModifiedDate
+//    private LocalDateTime updatedAt;
     /**
      * @OneToMany(fetch=FetchType.EAGER)
      * private List<Address> address;
@@ -38,49 +50,4 @@ public class User {
 
     @Transient
     private String testData;
-
-    // @Enumerated(value=EnumType.STRING)
-    // private Gender gender;
-
-    // Entity-Listener
-    // PrePersist , PostPersist
-    // PreUpdate , PostUpdate
-    // PreRemove , PostRemove
-    // PostLoad
-    @PrePersist
-    public void prePersist() {
-        this.createdAt = LocalDateTime.now();
-        System.out.println("[Pre-Persist] >>>");
-    }
-
-    /*@PostPersist
-    public void postPersist() {
-        System.out.println("[Post-Persist] >>> ");
-    }*/
-
-    @PreUpdate
-    public void PreUpdate() {
-        this.updatedAt = LocalDateTime.now();
-        System.out.println("[Pre-Update] >>> ");
-    }
-
-    /*@PostUpdate
-    public void PostUpdate() {
-        System.out.println("[PostUpdate] >>> ");
-    }*/
-
-//    @PreRemove
-//    public void PreRemove() {
-//        System.out.println("[PreRemove] >>> ");
-//    }
-//
-//    @PostRemove
-//    public void PostRemove() {
-//        System.out.println("[PostRemove] >>> ");
-//    }
-//
-//    @PostLoad
-//    public void postLoad() {
-//        System.out.println("[Post-Load] >>>");
-//    }
 }
