@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @EntityListeners(value= AuditingEntityListener.class)
 @Data // Getter, Setter 필요
 @MappedSuperclass
-public class BaseEntity {
+public class BaseEntity implements Auditable {
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate

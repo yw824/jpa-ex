@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @ToString(callSuper=true)
 @EqualsAndHashCode(callSuper=true)
 // @EntityListeners(value= AuditingEntityListener.class)
-public class UserHistory extends BaseEntity implements Auditable {
+public class UserHistory extends BaseEntity {
     /**
      * BaseEntity에서 AuditingEntityListener 설정하므로 여기서는 생략
      */

@@ -16,8 +16,7 @@ import java.time.LocalDateTime;
 @Data
 @ToString(callSuper=true)
 @EqualsAndHashCode(callSuper=true)
-// @EntityListeners(value= AuditingEntityListener.class)
-public class Book extends BaseEntity implements Auditable {
+public class Book extends BaseEntity {
     /**
      * BaseEntity에서 AuditingEntityListener 설정하므로 여기서는 생략
      */
@@ -29,19 +28,11 @@ public class Book extends BaseEntity implements Auditable {
 
     private String author;
 
-//    private LocalDateTime createdAt;
-//
-//    private LocalDateTime updatedAt;
+    private Long authorId;
 
-    // 이전에 썼던 방식 - 이번에는 다르게 해볼 예정
-//    @PrePersist
-//    public void prePersist() {
-//        this.createdAt = LocalDateTime.now();
-//        this.updatedAt = LocalDateTime.now();
-//    }
-//
-//    @PreUpdate
-//    public void preUpdate() {
-//        this.updatedAt = LocalDateTime.now();
-//    }
+    private Long publisherId;
+
+    @OneToOne(mappedBy = "book")
+    @ToString.Exclude
+    private BookReviewInfo bookReviewInfo;
 }
