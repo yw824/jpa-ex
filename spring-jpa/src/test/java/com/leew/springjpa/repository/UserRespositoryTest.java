@@ -1,5 +1,6 @@
 package com.leew.springjpa.repository;
 
+import com.leew.springjpa.dto.Gender;
 import com.leew.springjpa.dto.User;
 import jakarta.transaction.Transactional;
 import org.assertj.core.util.Lists;
@@ -126,5 +127,20 @@ class UserRespositoryTest {
         // 이러면, 여러 개의 값을 가져오기 위해 List<User>를 위한 함수를 가져와야 한다.
         // UserRepository 코드 : List<User> findAllByName(String name);
         userRepository.findAllByName("martin").forEach(System.out::println);
+    }
+
+    /**
+     * User Relation 관련 테스트
+     */
+    @Test
+    void userRelationTest() {
+        User user = new User();
+        user.setName("David");
+        user.setEmail("david@fastcampus.com");
+        user.setGender(Gender.MALE);
+
+        userRepository.save(user);
+
+        userRepository.findAll().forEach(System.out::println);
     }
 }

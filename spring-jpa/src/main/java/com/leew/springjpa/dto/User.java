@@ -10,6 +10,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -48,6 +49,13 @@ public class User extends BaseEntity {
      * private List<Address> address;
      */
 
+    @Enumerated(value=EnumType.STRING)
+    private Gender gender;
+
     @Transient
     private String testData;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name="user_id")
+    private List<UserHistory> userHistories = new ArrayList<>();
 }
