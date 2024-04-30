@@ -85,5 +85,9 @@ class UserHistoryRespositoryTest {
 
         List<UserHistory> result = userRepository.findByEmail("daniel@fastcampus.com").getUserHistories();
         result.forEach(System.out::println);
+
+        userHistoryRepository.findAll().forEach(System.out::println);
+
+        System.out.println("UserHistory.getUser(): " + userHistoryRepository.findAll().get(0).getUser());
     }
 }

@@ -26,18 +26,17 @@ public class UserHistory extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="user_id")
-    private Long userId;
-
     private String name;
 
     private String email;
 
+// 여기에도 Auditable implement해야 Lombok으로 처리
 //    @CreatedDate
 //    private LocalDateTime createdAt;
 //
 //    @LastModifiedDate
 //    private LocalDateTime updatedAt;
 
-    // 여기에도 Auditable implement해야 Lombok으로 처리
+    @ManyToOne
+    private User user;
 }
