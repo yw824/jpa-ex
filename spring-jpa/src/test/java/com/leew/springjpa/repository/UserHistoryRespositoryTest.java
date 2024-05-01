@@ -63,7 +63,7 @@ class UserHistoryRespositoryTest {
         ).forEach(System.out::println);
     }
 
-    @Test // db-keep.yml 설정으로 변환해 놓고 수행하기
+    @Test
     void relationMappedTest() {
         User user = new User();
         user.setName("David");

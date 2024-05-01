@@ -35,7 +35,7 @@ class BookReviewInfoRepositoryTest {
         Book book = new Book();
         book.setName("JPA 초격차 crudTest2");
         book.setAuthorId(1L);
-        book.setPublisherId(1L);
+        // book.setPublisherId(1L);
 
         bookRepository.save(book);
 
@@ -61,7 +61,7 @@ class BookReviewInfoRepositoryTest {
         Book book = new Book();
         book.setName("JPA 초격차 패키지");
         book.setAuthorId(1L);
-        book.setPublisherId(1L);
+        // book.setPublisherId(1L);
 
         // save 함수는, 저장된 entity를 그대로 리턴하도록 되어 있다.
         return bookRepository.save(book);

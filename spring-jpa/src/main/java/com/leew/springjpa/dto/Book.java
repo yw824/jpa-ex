@@ -9,6 +9,8 @@ import lombok.ToString;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -30,9 +32,20 @@ public class Book extends BaseEntity {
 
     private Long authorId;
 
-    private Long publisherId;
-
+    // Book : BookReviewInfo = 1 : 1 -> 수평적 확장
     @OneToOne(mappedBy = "book")
     @ToString.Exclude
     private BookReviewInfo bookReviewInfo;
+
+    // Book : Review = 1 : N
+    @OneToMany
+    @JoinColumn(name="book_id")
+    @ToString.Exclude
+    private List<Review> reviews = new ArrayList<>();
+
+    // Book : Publisher = N : 1
+    @ManyToOne
+    @JoinColumn
+    @ToString.Exclude
+    private Publisher publisher;
 }

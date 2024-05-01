@@ -59,4 +59,10 @@ public class User extends BaseEntity {
     @JoinColumn(name="user_id", insertable=false, updatable=false)
     @ToString.Exclude
     private List<UserHistory> userHistories = new ArrayList<>();
+
+    // User : Review = 1 : N
+    @OneToMany//(fetch = FetchType.EAGER) // 에러날 것
+    @JoinColumn(name="user_id")
+    @ToString.Exclude
+    private List<Review> reviews = new ArrayList<>();
 }
