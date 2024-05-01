@@ -20,11 +20,20 @@ public class Author extends BaseEntity {
 
     private String name;
 
-    @ManyToMany
-    @ToString.Exclude
-    private List<Book> books = new ArrayList<>(); // null pointer Exception 방지
+//    @ManyToMany
+//    @ToString.Exclude
+//    private List<Book> books = new ArrayList<>(); // null pointer Exception 방지
 
-    public void addBook(Book... book) {
-        Collections.addAll(this.books, book);
+    @OneToMany
+    @JoinColumn(name="author_id")
+    @ToString.Exclude
+    private List<BookAndAuthor> bookAndAuthors = new ArrayList<>();
+
+//    public void addBook(Book... book) {
+//        Collections.addAll(this.books, book);
+//    }
+
+    public void addBookAndAuthors(BookAndAuthor... bookAndAuthor) {
+        Collections.addAll(this.bookAndAuthors, bookAndAuthor);
     }
 }
