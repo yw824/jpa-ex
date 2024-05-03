@@ -25,6 +25,8 @@ class BookReviewInfoRepositoryTest {
         bookReviewInfo.setAverageReviewScore(4.5f);
         bookReviewInfo.setReviewCount(2);
 
+        bookReviewInfo.setBook(givenBook());
+
         bookReviewInfoRepository.save(bookReviewInfo);
 
         bookReviewInfoRepository.findAll().forEach(System.out::println);
@@ -43,6 +45,7 @@ class BookReviewInfoRepositoryTest {
         // bookReviewInfo.setBookId(1L);
         bookReviewInfo.setAverageReviewScore(4.5f);
         bookReviewInfo.setReviewCount(2);
+        bookReviewInfo.setBook(givenBook());
 
         bookReviewInfoRepository.save(bookReviewInfo);
 
