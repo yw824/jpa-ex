@@ -18,11 +18,13 @@ class BookServiceTest {
     @Autowired
     private AuthorRepository authorRepository;
 
-    @Transactional
     @Test
     void transactionTest() {
-        bookService.putBookAndAuthor();
-
+        try {
+            bookService.putBookAndAuthor();
+        } catch (Exception e) {
+            System.out.println(">>> " + e.getMessage());
+        }
         bookRepository.findAll().forEach(System.out::println);
         authorRepository.findAll().forEach(System.out::println);
     }
