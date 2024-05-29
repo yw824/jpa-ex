@@ -16,15 +16,15 @@ public class BookService {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void putBookAndAuthor() {
         Book book = new Book();
-        book.setName("JPA 시작하기1111");
+        book.setName("JPA 시작하기_forRollback333");
 
         bookRepository.save(book);
 
         Author author = new Author();
-        author.setName("martin1111");
+        author.setName("martinforRollBack333");
 
         authorRepository.save(author);
 
