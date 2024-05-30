@@ -32,7 +32,7 @@ public class BookService {
         throw new RuntimeException("오류가 나서 DB commit이 나지 않아야 합니다.");
     }
 
-    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void get(String name) {
         System.out.println(">>> " + bookRepository.findByName(name)); // breakpoint 1
         bookRepository.findAll().forEach(System.out::println);
