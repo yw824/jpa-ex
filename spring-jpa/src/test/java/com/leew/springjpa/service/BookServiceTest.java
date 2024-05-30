@@ -38,7 +38,7 @@ class BookServiceTest {
 
         bookService.get("JPA Isolation Test");
         System.out.println("Isolation Test: ");
-        bookRepository.findAll().forEach(System.out::println);
+        bookRepository.findAll().forEach(System.out::println); // breakpoint 4
     }
 
 }

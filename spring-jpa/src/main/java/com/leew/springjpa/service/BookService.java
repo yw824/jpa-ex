@@ -7,6 +7,7 @@ import com.leew.springjpa.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -31,12 +32,17 @@ public class BookService {
         throw new RuntimeException("오류가 나서 DB commit이 나지 않아야 합니다.");
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     public void get(String name) {
-        System.out.println(">>> " + bookRepository.findByName(name));
+        System.out.println(">>> " + bookRepository.findByName(name)); // breakpoint 1
         bookRepository.findAll().forEach(System.out::println);
 
-        System.out.println(">>> " + bookRepository.findByName(name));
+        System.out.println(">>> " + bookRepository.findByName(name)); // breakpoint 2
         bookRepository.findAll().forEach(System.out::println);
+
+        Book book = bookRepository.findByName(name);
+        book.setName("바뀔까???");
+        bookRepository.save(book);
+        // breakpoint 3
     }
 }
