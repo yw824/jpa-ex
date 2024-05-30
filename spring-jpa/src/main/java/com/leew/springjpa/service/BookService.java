@@ -30,4 +30,13 @@ public class BookService {
 
         throw new RuntimeException("오류가 나서 DB commit이 나지 않아야 합니다.");
     }
+
+    @Transactional
+    public void get(String name) {
+        System.out.println(">>> " + bookRepository.findByName(name));
+        bookRepository.findAll().forEach(System.out::println);
+
+        System.out.println(">>> " + bookRepository.findByName(name));
+        bookRepository.findAll().forEach(System.out::println);
+    }
 }

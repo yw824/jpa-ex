@@ -33,6 +33,8 @@ public class Book extends BaseEntity {
 
     private Long authorId;
 
+    private String category;
+
     // Book : BookReviewInfo = 1 : 1 -> 수평적 확장
     @OneToOne(mappedBy = "book")
     @ToString.Exclude

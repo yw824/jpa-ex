@@ -1,5 +1,6 @@
 package com.leew.springjpa.service;
 
+import com.leew.springjpa.dto.Book;
 import com.leew.springjpa.repository.AuthorRepository;
 import com.leew.springjpa.repository.BookRepository;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,17 @@ class BookServiceTest {
         }
         bookRepository.findAll().forEach(System.out::println);
         authorRepository.findAll().forEach(System.out::println);
+    }
+
+    @Test
+    void isolationTest() {
+        Book book = new Book();
+        book.setName("JPA Isolation Test");
+        bookRepository.save(book);
+
+        bookService.get("JPA Isolation Test");
+        System.out.println("Isolation Test: ");
+        bookRepository.findAll().forEach(System.out::println);
     }
 
 }
