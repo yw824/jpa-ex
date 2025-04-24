@@ -4,6 +4,7 @@ import com.leew.springjpa.dto.Author;
 import com.leew.springjpa.dto.Book;
 import com.leew.springjpa.repository.AuthorRepository;
 import com.leew.springjpa.repository.BookRepository;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
+    private final EntityManager entityManager;
 
     @Transactional(rollbackFor = Exception.class)
     public void putBookAndAuthor() {
@@ -44,5 +46,19 @@ public class BookService {
         book.setName("바뀔까???");
         bookRepository.save(book);
         // breakpoint 3
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public void get(Long id) {
+
+        System.out.println(">>> " + bookRepository.findById(id));
+        System.out.println(">>> " + bookRepository.findAll());
+
+        // EntityManager로 EntityCache 삭제
+        entityManager.clear();
+
+        System.out.println(">>> " + bookRepository.findById(id));
+        System.out.println(">>> " + bookRepository.findAll());
+
     }
 }

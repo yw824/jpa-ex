@@ -41,4 +41,27 @@ class BookServiceTest {
         bookRepository.findAll().forEach(System.out::println); // breakpoint 4
     }
 
+    @Test
+    void isolationUnCommitedTest() {
+        Book book = new Book();
+        book.setName("JPA 강의");
+
+        bookRepository.save(book);
+        bookService.get(1L);
+
+        System.out.println(">>> " + bookRepository.findAll());
+    }
+
+    @Test
+    // BookService에서 get 함수의 Transactional 격리 수준을 READ_COMMITED로 설정
+    void isolationCommitedTest() {
+        Book book = new Book();
+        book.setName("JPA 강의");
+
+        bookRepository.save(book);
+        bookService.get(1L);
+
+        System.out.println(">>> " + bookRepository.findAll()); // breakpoint
+    }
+
 }
