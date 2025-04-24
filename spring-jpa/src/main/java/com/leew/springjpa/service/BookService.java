@@ -48,7 +48,7 @@ public class BookService {
         // breakpoint 3
     }
 
-    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public void get(Long id) {
 
         System.out.println("001 >>> " + bookRepository.findById(id));

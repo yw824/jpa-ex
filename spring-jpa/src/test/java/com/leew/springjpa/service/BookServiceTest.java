@@ -57,6 +57,7 @@ class BookServiceTest {
     void isolationCommitedTest() {
         Book book = new Book();
         book.setName("JPA 강의");
+        book.setId(1L);
 
         bookRepository.save(book);
         bookService.get(1L);
