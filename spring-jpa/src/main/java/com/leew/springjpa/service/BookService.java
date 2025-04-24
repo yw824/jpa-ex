@@ -60,5 +60,7 @@ public class BookService {
         System.out.println("003 >>> " + bookRepository.findById(id));
         System.out.println("004 >>> " + bookRepository.findAll());
 
+        bookRepository.update();
+        entityManager.clear();
     }
 }

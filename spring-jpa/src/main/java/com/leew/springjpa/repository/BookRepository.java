@@ -13,4 +13,8 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     Book findByName(String name);
+
+    @Modifying
+    @Query(value="update book set category='none'", nativeQuery = true)
+    void update();
 }
