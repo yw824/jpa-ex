@@ -48,17 +48,17 @@ public class BookService {
         // breakpoint 3
     }
 
-    @Transactional(isolation = Isolation.READ_COMMITTED)
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public void get(Long id) {
 
-        System.out.println(">>> " + bookRepository.findById(id));
-        System.out.println(">>> " + bookRepository.findAll());
+        System.out.println("001 >>> " + bookRepository.findById(id));
+        System.out.println("002 >>> " + bookRepository.findAll());
 
         // EntityManager로 EntityCache 삭제
         entityManager.clear();
 
-        System.out.println(">>> " + bookRepository.findById(id));
-        System.out.println(">>> " + bookRepository.findAll());
+        System.out.println("003 >>> " + bookRepository.findById(id));
+        System.out.println("004 >>> " + bookRepository.findAll());
 
     }
 }

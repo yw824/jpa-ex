@@ -61,7 +61,7 @@ class BookServiceTest {
         bookRepository.save(book);
         bookService.get(1L);
 
-        System.out.println(">>> " + bookRepository.findAll()); // breakpoint
+        System.out.println("005 >>> " + bookRepository.findAll()); // breakpoint
     }
 
 }
