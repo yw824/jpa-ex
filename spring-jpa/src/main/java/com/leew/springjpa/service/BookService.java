@@ -9,29 +9,33 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class BookService {
 
+    // Bean 주입받기
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
     private final EntityManager entityManager;
+    private final AuthorService authorService;
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRED)
     public void putBookAndAuthor() {
         Book book = new Book();
         book.setName("JPA 시작하기_forRollback333");
 
         bookRepository.save(book);
 
-        Author author = new Author();
-        author.setName("martinforRollBack333");
+        // transaction 확인 위해 authorService 새로 생성
+        try {
+            authorService.putAuthor();
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
 
-        authorRepository.save(author);
-
-        throw new RuntimeException("오류가 나서 DB commit이 나지 않아야 합니다.");
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED)

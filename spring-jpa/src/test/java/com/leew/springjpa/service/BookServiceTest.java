@@ -26,8 +26,8 @@ class BookServiceTest {
         } catch (Exception e) {
             System.out.println(">>> " + e.getMessage());
         }
-        bookRepository.findAll().forEach(System.out::println);
-        authorRepository.findAll().forEach(System.out::println);
+        System.out.println(bookRepository.findAll());
+        System.out.println(authorRepository.findAll());
     }
 
     @Test
