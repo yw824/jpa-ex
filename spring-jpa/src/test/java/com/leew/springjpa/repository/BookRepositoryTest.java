@@ -69,6 +69,50 @@ class BookRepositoryTest {
         return bookRepository.save(book);
     }
 
+    @Test
+    // @Transactional
+    void bookCascadeTest() {
+        Book book = new Book();
+        book.setName("JPA 초격차 패키지 - cascade");
+
+        // bookRepository.save(book); // 영속화
+
+        /**
+        book 엔티티는 많은 다른 엔티티와 릴레이션 맺고 있지만,
+        간단한 관계 위해 publisher를 설정할 예정
+        */
+        Publisher publisher = new Publisher();
+        publisher.setName("패스트캠퍼스 - cascade");
+
+        // publisherRepository.save(publisher);
+        book.setPublisher(publisher);
+
+        // bookRepository.save(book);
+
+        // publisher의 book은 리스트 형식으로 저장되어 있으므로
+        // 먼저 가져온 후에 add하여 다시 저장
+        // publisher.getBooks().add(book); // call by reference
+        // books ArrayList를 가져온 다음에 add해도 해당 publisher에 저장됨
+
+        // add하는 함수를 아예 publisher Entity에 추가
+        publisher.addBook(book);
+
+        // cascade : 맨 마지막에만 추가한다.
+        bookRepository.save(book);
+        publisherRepository.save(publisher);
+
+        System.out.println("books: " + bookRepository.findAll());
+        System.out.println("publishers: " + publisherRepository.findAll());
+
+        Book book1 = bookRepository.findById(104L).get();
+        book1.getPublisher().setName("슬로우캠퍼스");
+
+        bookRepository.save(book1);
+
+        System.out.println("publishers: >>> " );
+        publisherRepository.findAll().forEach(System.out::println);
+    }
+
     private Publisher givenPublisher() {
         Publisher publisher = new Publisher();
         publisher.setName("패스트캠퍼스");

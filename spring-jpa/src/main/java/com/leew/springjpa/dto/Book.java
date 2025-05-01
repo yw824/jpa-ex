@@ -49,7 +49,7 @@ public class Book extends BaseEntity {
     private List<Review> reviews = new ArrayList<>();
 
     // Book : Publisher = N : 1
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn
     @ToString.Exclude
     private Publisher publisher;
